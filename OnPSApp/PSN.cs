@@ -43,9 +43,10 @@ namespace OnPS
 
         private void PSNLogin_FormClosing(object sender, FormClosingEventArgs e)
         {
-            //e.Cancel = true;
-            //Application.Exit();
-            Environment.Exit(-1);
+            if (IniModel.GetPSNRefreshToken() == null)
+            {
+                Environment.Exit(-1);
+            }
         }
 
         private void PSNLogin_Load(object sender, EventArgs e)

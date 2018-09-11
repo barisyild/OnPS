@@ -56,6 +56,25 @@ namespace OnPS
 
         private void Loader_Shown(object sender, EventArgs e)
         {
+            String AccessToken = null;
+            String PSNRefreshToken = IniModel.GetPSNRefreshToken();
+            if (PSNRefreshToken == null)
+            {
+                this.Hide();
+                PSN login = new PSN();
+                login.ShowDialog();
+                PSNRefreshToken = IniModel.GetPSNRefreshToken();
+            }
+            try
+            {
+                AccessToken = Platforms.PSN.AuthWithRefreshToken(PSNRefreshToken).Item1;
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Unable to connect PlayStation Network.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                Environment.Exit(-1);
+            }
+
             if (IniModel.GetSteamUsername() != null && IniModel.GetSteamLoginKey() != null)
             {
                 Program.steam.manager.Subscribe<SteamUser.LoggedOnCallback>(OnLoggedOn);
@@ -68,29 +87,9 @@ namespace OnPS
                 SteamLogin steamLogin = new SteamLogin();
                 steamLogin.ShowDialog();
             }*/
-            String AccessToken = null;
-            String PSNRefreshToken = IniModel.GetPSNRefreshToken();
-            if (PSNRefreshToken == null)
-            {
-                this.Hide();
-                PSN login = new PSN();
-                login.ShowDialog();
-            }
-            else
-            {
-                try
-                {
-                    AccessToken = Platforms.PSN.AuthWithRefreshToken(PSNRefreshToken).Item1;
-                }
-                catch (Exception)
-                {
-                    MessageBox.Show("Unable to connect PlayStation Network.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
-                    Environment.Exit(-1);
-                }
-            }
             Program.AccessToken = AccessToken;
-            OnPS OnPSClient = new OnPS();
             this.Hide();
+            OnPS OnPSClient = new OnPS();
             OnPSClient.ShowDialog();
         }
 

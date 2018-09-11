@@ -243,5 +243,10 @@ namespace OnPS
         {
             Process.Start("https://www.onpsapp.com/credits");
         }
+
+        private void helpToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Process.Start("https://www.onpsapp.com/search");
+        }
     }
 }
