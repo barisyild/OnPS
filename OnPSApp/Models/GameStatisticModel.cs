@@ -24,7 +24,7 @@ namespace OnPS.Models
 
         public GameStatisticModel(String onlineId, String platform, String npTitleId, String titleName, String npTitleIconUrl)
         {
-            string folderPath = Application.StartupPath + "/profiles/"+ onlineId + "/"+platform+"/";
+            string folderPath = Program.SavePath + "/profiles/"+ onlineId + "/"+platform+"/";
 
             bool exists = System.IO.Directory.Exists(folderPath);
 
@@ -117,7 +117,7 @@ namespace OnPS.Models
 
         public static ArrayList GetAvailablePlatforms(String onlineId)
         {
-            String Path = Application.StartupPath + @"\profiles\" + onlineId;
+            String Path = Program.SavePath + @"\profiles\" + onlineId;
             if (!Directory.Exists(Path))
             {
                 Directory.CreateDirectory(Path);
@@ -136,7 +136,7 @@ namespace OnPS.Models
 
         public static ArrayList GetFiles(String onlineId, String platform)
         {
-            String Path = Application.StartupPath + @"\profiles\" + onlineId + @"\" + platform + @"\";
+            String Path = Program.SavePath + @"\profiles\" + onlineId + @"\" + platform + @"\";
             if (!Directory.Exists(Path))
             {
                 Directory.CreateDirectory(Path);

@@ -9,7 +9,7 @@ namespace OnPS.Other
     class IniFile   // revision 11
     {
         string Path;
-        string EXE = Assembly.GetExecutingAssembly().GetName().Name;
+        string ApplicationName = "OnPS";
 
         [DllImport("kernel32", CharSet = CharSet.Unicode)]
         static extern long WritePrivateProfileString(string Section, string Key, string Value, string FilePath);
@@ -19,29 +19,29 @@ namespace OnPS.Other
 
         public IniFile(string IniPath = null)
         {
-            Path = new FileInfo(IniPath + EXE + ".ini").FullName.ToString();
+            Path = new FileInfo(IniPath + ApplicationName + ".ini").FullName.ToString();
         }
 
         public string Read(string Key, string Section = null)
         {
             var RetVal = new StringBuilder(255);
-            GetPrivateProfileString(Section ?? EXE, Key, "", RetVal, 255, Path);
+            GetPrivateProfileString(Section ?? ApplicationName, Key, "", RetVal, 255, Path);
             return RetVal.ToString();
         }
 
         public void Write(string Key, string Value, string Section = null)
         {
-            WritePrivateProfileString(Section ?? EXE, Key, Value, Path);
+            WritePrivateProfileString(Section ?? ApplicationName, Key, Value, Path);
         }
 
         public void DeleteKey(string Key, string Section = null)
         {
-            Write(Key, null, Section ?? EXE);
+            Write(Key, null, Section ?? ApplicationName);
         }
 
         public void DeleteSection(string Section = null)
         {
-            Write(null, null, Section ?? EXE);
+            Write(null, null, Section ?? ApplicationName);
         }
 
         public bool KeyExists(string Key, string Section = null)

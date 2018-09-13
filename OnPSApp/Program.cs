@@ -12,6 +12,7 @@ namespace OnPS
 {
     static class Program
     {
+        public static String SavePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/OnPS/";
         public const String VERSION = "1.0.0.0";
         public static NotifyIcon notifyIcon;
         public static bool steamAvailable = false;
@@ -59,6 +60,10 @@ namespace OnPS
                     AllocConsole();
                 }
             }
+            bool exists = System.IO.Directory.Exists(SavePath);
+
+            if (!exists)
+                System.IO.Directory.CreateDirectory(SavePath);
             using (mutex = new Mutex(false, appGuid))
             {
                 if (!mutex.WaitOne(0, false))
@@ -66,7 +71,7 @@ namespace OnPS
                     MessageBox.Show("OnPS already running.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                     return;
                 }
-                iniFile = new IniFile(Application.StartupPath+@"\");
+                iniFile = new IniFile(SavePath + @"\");
                 Application.EnableVisualStyles();
                 Application.SetCompatibleTextRenderingDefault(false);
                 System.Net.ServicePointManager.ServerCertificateValidationCallback += delegate (object senderr, System.Security.Cryptography.X509Certificates.X509Certificate certificate, System.Security.Cryptography.X509Certificates.X509Chain chain, System.Net.Security.SslPolicyErrors sslPolicyErrors) {
