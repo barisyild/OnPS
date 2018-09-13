@@ -13,7 +13,7 @@ namespace OnPS
     static class Program
     {
         public static String SavePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/OnPS/";
-        public const String VERSION = "1.0.0.0";
+        public const String VERSION = "1.0.0.1";
         public static NotifyIcon notifyIcon;
         public static bool steamAvailable = false;
         private static Mutex mutex;

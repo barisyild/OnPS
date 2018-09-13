@@ -11,23 +11,31 @@ namespace OnPS.Other
     class Updater
     {
         public EventHandler UpdateAvailable;
-        public const String URL = "http://onpsapp.com/update.json";
+        public const String URL = "https://www.onpsapp.com/update.json";
         public Updater()
+        {
+            
+        }
+
+        public void run()
         {
             String data;
             try
             {
                 data = Network.HTTP_GET(URL, "", "");
             }
-            catch(Exception e)
+            catch (Exception e)
             {
                 //Update Halted!
                 return;
             }
             JObject updateData = JObject.Parse(data);
-            if(updateData["version"].ToString() != Program.VERSION)
+            if (updateData["version"].ToString() != Program.VERSION)
             {
-                UpdateAvailable(this, new EventArgs());
+                if (UpdateAvailable != null)
+                {
+                    UpdateAvailable(this, EventArgs.Empty);
+                }
             }
         }
 

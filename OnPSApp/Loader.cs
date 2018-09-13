@@ -13,6 +13,7 @@ namespace OnPS
 {
     public partial class Loader : Form
     {
+        private Updater updater;
         public int connectAttempt = 0;
         public Loader()
         {
@@ -22,13 +23,13 @@ namespace OnPS
                 Environment.Exit(-1);
                 return;
             }
-            Updater updater = new Updater();
+            updater = new Updater();
             updater.UpdateAvailable += onUpdateAvailable;
         }
 
         public void onUpdateAvailable(object sender, EventArgs e)
         {
-            DialogResult result = MessageBox.Show("OnPS new version is available now.\nWould you like to update it?", "Update Available",MessageBoxButtons.OKCancel);
+            DialogResult result = MessageBox.Show("OnPS new version is available now.\nWould you like to update it?", "Update Available",MessageBoxButtons.OKCancel,MessageBoxIcon.Warning);
             if(result == DialogResult.OK)
             {
                 Process.Start("https://www.onpsapp.com/");
@@ -56,6 +57,8 @@ namespace OnPS
 
         private void Loader_Shown(object sender, EventArgs e)
         {
+            this.Visible = false;
+            updater.run();
             String AccessToken = null;
             String PSNRefreshToken = IniModel.GetPSNRefreshToken();
             if (PSNRefreshToken == null)
