@@ -176,7 +176,7 @@ namespace OnPS.Platforms
 
         private void OnLoginKey(SteamUser.LoginKeyCallback callback)
         {
-            if (string.IsNullOrEmpty(callback?.LoginKey))
+            if (string.IsNullOrEmpty(callback.LoginKey))
             {
                 return;
             }
