@@ -31,9 +31,9 @@ namespace OnPS
 
         private void initGameTypes()
         {
-            String titleName = OnPS.ActivityModel.titleName;
+            String titleName = OnPS.activityModel.titleName;
             String platform = PsnPlatformComboBox.SelectedItem.ToString();
-            if (titleName == null || OnPS.ActivityModel.platform != platform)
+            if (titleName == null || OnPS.activityModel.platform != platform)
             {
                 titleName = SampleGameName;
             }
@@ -57,7 +57,7 @@ namespace OnPS
                 SteamLogButton.Text = "Login";
             }
             checkBox1.Checked = Utils.StartupEnabled();
-            PsnUsernameLabel.Text = OnPS.ActivityModel.onlineId;
+            PsnUsernameLabel.Text = OnPS.activityModel.onlineId;
             SteamUsernameLabel.Text = IniModel.GetSteamUsername();
             PsnPlatformComboBox.Text = IniModel.GetPSNPlatform();
             initGameTypes();

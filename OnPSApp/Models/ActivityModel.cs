@@ -8,7 +8,7 @@ using System.Timers;
 
 namespace OnPS.Models
 {
-    class ActivityModel
+    public class ActivityModel
     {
         public event EventHandler OnGameChangedEvent;
         public event EventHandler OnGameCloseEvent;

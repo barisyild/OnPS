@@ -128,7 +128,7 @@ namespace OnPS.Platforms
             return AuthModel;
         }
 
-        public static (String, String) AuthWithRefreshToken(String RefreshToken)
+        public static String[] AuthWithRefreshToken(String RefreshToken)
         {
             String postData = "grant_type=refresh_token&refresh_token=" + RefreshToken + "&scope=psn:clientapp&";
             JObject o = null; //initialize variable!
@@ -146,7 +146,10 @@ namespace OnPS.Platforms
             Console.WriteLine("AccessToken: " + AccessToken);
             String RefreshTkn = o.GetValue("refresh_token").ToString();
             Console.WriteLine("RefreshToken: " + RefreshTkn);
-            return (AccessToken, RefreshTkn);
+            String[] output = new string[2];
+            output[0] = AccessToken;
+            output[1] = RefreshTkn;
+            return output;
         }
     }
 }

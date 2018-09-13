@@ -19,8 +19,8 @@ namespace OnPS
     public partial class OnPS : Form
     {
         private Settings settings;
-        private ActivityModel activityModel;
-        internal ActivityModel ActivityModel { get => activityModel; set => activityModel = value; }
+        public ActivityModel activityModel;
+        //internal ActivityModel ActivityModel {get => activityModel; set => activityModel = value; }
         private Tasks tasks;
 
 

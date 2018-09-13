@@ -39,9 +39,7 @@ namespace OnPS
         private void login_Click(object sender, EventArgs e)
         {
             if(username.Text == "" || password.Text == "")
-            {
                 return;
-            }
             this.Cursor = Cursors.WaitCursor;
             Program.steam = new Platforms.Steam();
             Program.steam.manager.Subscribe<SteamUser.LoggedOnCallback>(OnLoggedOn);

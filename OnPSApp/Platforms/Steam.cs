@@ -41,7 +41,7 @@ namespace OnPS.Platforms
                 }
                 else
                 {
-                    Console.WriteLine($"Using persisted cell ID {cellid}");
+                    Console.WriteLine("Using persisted cell ID " + cellid);
                 }
             }
 

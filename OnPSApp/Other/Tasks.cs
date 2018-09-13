@@ -64,15 +64,15 @@ namespace OnPS.Other
                 {
                     if (Network.CheckForInternetConnection())
                     {
-                        (String, String) TokenData = Platforms.PSN.AuthWithRefreshToken(IniModel.GetPSNRefreshToken());
-                        if (TokenData.Item1 == null)
+                        String[] TokenData = Platforms.PSN.AuthWithRefreshToken(IniModel.GetPSNRefreshToken());
+                        if (TokenData[0] == null)
                         {
                             PsnTaskTokenSource.Cancel();
                             MessageBox.Show("An unknown error has occurred. Please try again later.", "Error", MessageBoxButtons.OK, MessageBoxIcon.Error);
                             Application.Exit();
                             return;
                         }
-                        Program.AccessToken = TokenData.Item1;
+                        Program.AccessToken = TokenData[0];
                         errorCount = 0;
                     }
                     else

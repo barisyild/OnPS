@@ -67,7 +67,7 @@ namespace OnPS
             }
             try
             {
-                AccessToken = Platforms.PSN.AuthWithRefreshToken(PSNRefreshToken).Item1;
+                AccessToken = Platforms.PSN.AuthWithRefreshToken(PSNRefreshToken)[0];
             }
             catch (Exception)
             {

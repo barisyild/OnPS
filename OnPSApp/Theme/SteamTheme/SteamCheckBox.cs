@@ -92,7 +92,7 @@ namespace SteamTheme
 			}
 		}
 
-        internal MouseState State1 { get => State; set => State = value; }
+        public MouseState State1;
 
         public SteamCheckBox()
 		{
