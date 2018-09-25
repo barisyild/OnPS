@@ -92,7 +92,15 @@ namespace OnPS
                 }
 
                 /* Variables */
-                var bitmap = await Task.Run(() => GetImageAsync(npTitleIconUrl));
+                Image bitmap = null;
+                if (npTitleIconUrl == "")
+                {
+                    bitmap = new Bitmap(Properties.Resources.NoGameImage);
+                }
+                else
+                {
+                    bitmap = await Task.Run(() => GetImageAsync(npTitleIconUrl));
+                }
                 imageList.Images.Add("itemImageKey", bitmap);
                 ListViewItem listViewItem = new ListViewItem();
                 listViewItem.Text = titleName + "\n" + Utils.CalculateMinuteToTime(totalPlayTime) + "on records.";

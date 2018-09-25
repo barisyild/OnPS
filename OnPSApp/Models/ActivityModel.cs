@@ -101,16 +101,6 @@ namespace OnPS.Models
                     {
                         OnPrimaryOnlineStatusChangedEvent(this, EventArgs.Empty);
                     }
-                    if (value == OnlineStatusModel.OFFLINE || value == OnlineStatusModel.STANDBY)
-                    {
-                        if (gameTimeTimer != null)
-                            gameTimeTimer.Stop();
-                    }
-                    else
-                    {
-                        if (gameTimeTimer != null)
-                            gameTimeTimer.Start();
-                    }
                 }
             }
         }
@@ -126,16 +116,6 @@ namespace OnPS.Models
                     if (OnOnlineStatusChangedEvent != null)
                     {
                         OnOnlineStatusChangedEvent(this, EventArgs.Empty);
-                    }
-                    if (value == OnlineStatusModel.OFFLINE || value == OnlineStatusModel.STANDBY)
-                    {
-                        if (gameTimeTimer != null)
-                            gameTimeTimer.Stop();
-                    }
-                    else
-                    {
-                        if (gameTimeTimer != null)
-                            gameTimeTimer.Start();
                     }
                 }
             }

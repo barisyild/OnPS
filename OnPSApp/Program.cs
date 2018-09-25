@@ -12,8 +12,10 @@ namespace OnPS
 {
     static class Program
     {
+        public static int onlineTimerInterval = 1000 * 60;
+        public static int offlineTimerInterval = 1000 * 120;
         public static String SavePath = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + "/OnPS/";
-        public const String VERSION = "1.0.0.1";
+        public const String VERSION = "1.0.0.2";
         public static NotifyIcon notifyIcon;
         public static bool steamAvailable = false;
         private static Mutex mutex;

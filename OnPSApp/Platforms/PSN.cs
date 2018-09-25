@@ -98,7 +98,14 @@ namespace OnPS.Platforms
                     gameData.platform = data["platform"].ToString();
                     gameData.titleName = data["titleName"].ToString();
                     gameData.npTitleId = data["npTitleId"].ToString();
-                    gameData.npTitleIconUrl = data["npTitleIconUrl"].ToString();
+                    try
+                    {
+                        gameData.npTitleIconUrl = data["npTitleIconUrl"].ToString();
+                    }
+                    catch(Exception)
+                    {
+                        gameData.npTitleIconUrl = "";
+                    }
                     activityModel.RunningGames.Add(gameData);
                 }
             }

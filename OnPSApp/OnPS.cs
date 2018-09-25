@@ -73,6 +73,7 @@ namespace OnPS
             activityModel.OnGameChangedEvent += OnGameChangedEvent; //Initialize Events
             activityModel.OnGameCloseEvent += OnGameCloseEvent;
             activityModel.OnOnlineStatusChangedEvent += OnOnlineStatusChangedEvent;
+            activityModel.OnPrimaryOnlineStatusChangedEvent += OnPrimaryOnlineStatusChangedEvent;
             activityModel.OnPlatformChangedEvent += OnPlatformChangedEvent;
             activityModel.OnGameStatusChangedEvent += OnGameStatusChangedEvent;
         }
@@ -124,12 +125,25 @@ namespace OnPS
             Utils.ShowNotify(Program.notifyIcon, PlatformModel.GetPlatformName(activityModel.platform) +  " Online Status: " + activityModel.onlineStatus);
         }
 
+        private void OnPrimaryOnlineStatusChangedEvent(object sender, EventArgs e)
+        {
+            if(activityModel.primaryOnlineStatus == OnlineStatusModel.ONLINE)
+            {
+                timer1.Interval = Program.onlineTimerInterval;
+            }
+            else
+            {
+                timer1.Interval = Program.offlineTimerInterval;
+            }
+        }
+
         public void OnGameChangedEvent(object sender, EventArgs e)
         {
             if(activityModel.titleName == null || activityModel.npTitleId == null)
             {
                 return;
             }
+            
             titleNameLabel.Text = activityModel.titleName;
             Utils.ShowNotify(Program.notifyIcon, activityModel.titleName);
             String ViewName = GameViewModel.getName(activityModel.titleName, activityModel.platform);
@@ -138,6 +152,7 @@ namespace OnPS
 
         private void OnGameCloseEvent(object sender, EventArgs e)
         {
+            
             titleNameLabel.Text = "";
             Utils.ShowNotify(Program.notifyIcon, "No games running.");
             Program.steam.PlayGame(null);
@@ -146,7 +161,14 @@ namespace OnPS
         private void OnPS_Load(object sender, EventArgs e)
         {
             this.SizeChanged += new System.EventHandler(this.OnPS_SizeChanged);
-            timer1.Interval = 1000 * 60;
+            if (activityModel.primaryOnlineStatus == OnlineStatusModel.ONLINE)
+            {
+                timer1.Interval = Program.onlineTimerInterval;
+            }
+            else
+            {
+                timer1.Interval = Program.offlineTimerInterval;
+            }
             timer1.Start();
         }
 
